@@ -145,13 +145,14 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
           const user = userCredential.user;
           const ime = this.ime;
 					const prezime = this.prezime;
-          alert("woohoooo");
+         
           })
           .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(error, errorCode, errorMessage);
-          alert("ne seri glupaco");
+          
+          
   });
         },
     },
