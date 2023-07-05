@@ -1,19 +1,12 @@
 # travelhelper
 
-## Project setup
-```
-npm install
-```
+- Naziv aplikacije i sastav vašeg tima: TravelHelper, Sara Mauko
+- Fakultet informatike u Puli (link na web): https://fipu.unipu.hr/
+- Kolegij: Programsko inženjerstvo (link na ntankovic.unipu.hr/pi)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Mentor: doc. dr. sc. Nikola Tanković (link na ntankovic.unipu.hr)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Kratki opis funkcionalnosti: Aplikacija u kojoj se pregledavaju potovanja, filtriraju se po karakteristikama, moze se dodavati u favorite, uređivati profil, ocjenjivati destinacije, login, signup....
+- Link na javni prototip
+- Zaduženja (planirana) po članu tima - ovaj dio commita svaki član tima za sebe: Sve radim sama :D
