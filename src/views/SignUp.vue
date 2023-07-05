@@ -137,6 +137,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
       };
     },
     methods: {
+        imee(){
+          const ime1=this.ime
+          return ime1;
+        },
         signup() {
           const auth = getAuth();
           createUserWithEmailAndPassword(auth,this.email, this.pass)
@@ -145,6 +149,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
           const user = userCredential.user;
           const ime = this.ime;
 					const prezime = this.prezime;
+          this.$router.push("/home");
          
           })
           .catch((error) => {
@@ -152,9 +157,9 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
           const errorMessage = error.message;
           console.log(error, errorCode, errorMessage);
           
-          
   });
         },
-    },
-  } 
+    }};
+
+
 </script>

@@ -1,6 +1,6 @@
 <template>
   
-<div>
+<div >
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
@@ -16,6 +16,9 @@
       <li class="nav-item">
         <router-link class="nav-link" to="/signup">Sign Up</router-link>
       </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" @click="logout()">Log Out</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -25,16 +28,41 @@
   </div>
     
 </template>
-<script>
 
-export default{
+
+
+<script>
+import { auth } from '@/firebase';
+
+
+
+export default {
   name: 'app',
   data() {
     return {
-      searchText:'sara',
-    };  
+      searchText: 'emaila',
+    };
+  },
+  methods: {
+    isLogedIn() {
+      auth.onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("***", user.email);
+        } else {
+          console.log("no email");
+        }
+      });
+    },
+    logout(){
+      auth.signOut();
+      
+    }
+  },
+  created() {
+    this.isLogedIn();
   },
 };
+
 </script>
 
 

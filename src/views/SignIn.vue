@@ -12,19 +12,19 @@
               <p class="text-black-50 mb-5">Upišite svoj e-mail i lozinku!</p>
 
               <div class="form-outline form-black mb-4">
-                <input type="email" id="typeEmailX" class="form-control form-control-lg" required/>
+                <input type="email" id="typeEmailX" v-model="email" class="form-control form-control-lg" required/>
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
 
               <div class="form-outline form-black mb-4">
-                <input type="password" id="typePasswordX" class="form-control form-control-lg" required />
+                <input type="password" id="typePasswordX" v-model="pass" class="form-control form-control-lg" required />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
               <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">Forgot password?</a></p>
               <div class="mt-4 pt-2">
-                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                <button class="btn btn-primary btn-lg" @click="login" type="button">Submit</button>
               
-              <p class="mb-0">Don't have an account? <a href="#!" class="text-blue-50 fw-bold">Sign Up</a>
+              <p class="mb-0">Don't have an account? <a href="/signup" class="text-blue-50 fw-bold">Sign Up</a>
               </p>
             </div>
             </div>
@@ -47,3 +47,34 @@ background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgb
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
 }</style>
+
+<script>
+import {
+	auth,
+	sendPasswordResetEmail,
+	signInWithEmailAndPassword,
+} from "@/firebase.js";
+export default{
+  name:"login",
+  data(){
+    return{
+      email:"",
+      pass:""
+    };
+  },
+  methods: {
+    login() {
+    
+			signInWithEmailAndPassword(auth, this.email, this.pass)
+				.then(() => {
+					this.$router.push("/home");
+				})
+				.catch((error) => {
+					alert(error.message);
+				});
+		},
+    }
+  }
+
+</script>
+
