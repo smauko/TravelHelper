@@ -20,10 +20,31 @@
         <p style="margin-left: -18px;">Croatia</p>
       </div>
       </div>
-    </div>
+      <!-- sve krivo
+    
+    <div class="col" style="margin-left:-50%;">
+      <div class="city-container">
+        <img style="text-align: center;" src="https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg" alt="City Image">
+        
+        <h3 style="margin-top: 20px; margin-left: -20px;">Pula</h3>
+        <p style="margin-left: -18px;">Croatia</p>
+      </div>
+    
+    
+    <div class="col" >
+      <div class="city-container">
+        <img style="text-align: center;" src="https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg" alt="City Image">
+        
+        <h3 style="margin-top: 20px; margin-left: -20px;">Pula</h3>
+        <p style="margin-left: -18px;">Croatia</p>
+      </div>
+      </div>
+      -->
   </div>
-  
 </div>
+    </div>
+
+  
 
 
 
