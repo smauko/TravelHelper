@@ -3,79 +3,69 @@
  <div class="search">
         
             <div class="d-flex">
-                <input name="naziv" type="text" class="form-control"
-                    placeholder="Ime destinacije (ne radi jos)">
-                <input type="submit" class="btn btn-outline-secondary" value="Pretraži">
+                <input v-model="store.searchTerm"  name="naziv" type="text" class="form-control"
+                    placeholder="Ime destinacije (radi ali treba filter) ">
+                <input  type="submit" class="btn btn-outline-secondary" value="Pretraži">
             </div>
+            
       
-    </div>
+      <div class="row">
   
-    <div class="container" style="margin-top: 55px;">
-  <div class="row align-items-start">
-    <div class="col">
-      <div class="city-container">
-        <img style="text-align: center;" src="https://media.istockphoto.com/id/613245222/photo/zagreb-cathedral-aerial-view.jpg?s=612x612&w=0&k=20&c=fWFAmfzzL_dHiXN35AL4kpz92yN3tkRIMxzZ9lPuIbE=" alt="City Image">
-        
-        <h3 style="margin-top: 20px; margin-left: -20px;">Zagreb</h3>
-        <p style="margin-left: -18px;">Croatia</p>
-      </div>
-      </div>
-      <!-- sve krivo
-    
-    <div class="col" style="margin-left:-50%;">
-      <div class="city-container">
-        <img style="text-align: center;" src="https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg" alt="City Image">
-        
-        <h3 style="margin-top: 20px; margin-left: -20px;">Pula</h3>
-        <p style="margin-left: -18px;">Croatia</p>
-      </div>
-    
-    
-    <div class="col" >
-      <div class="city-container">
-        <img style="text-align: center;" src="https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg" alt="City Image">
-        
-        <h3 style="margin-top: 20px; margin-left: -20px;">Pula</h3>
-        <p style="margin-left: -18px;">Croatia</p>
-      </div>
-      </div>
-      -->
-  </div>
-</div>
-    </div>
+    <Destinacija class="col" v-for="destinacije in filtriraneDestinacije" :key="destinacije.glavnaSlika"  :info="destinacije" />
 
   
+</div>
+  </div>
+  </div>
 
 
 
 </template>
 
-<style>
-  
-  .city-container {
-    display: inline-block;
-    background-color: #f1f1f1;
-    padding: 30px;
-  }
 
-  .city-container img {
-    width: 190px;
-    height: 190px;
-    object-fit: cover;
-    
-  }
-
-</style>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import Destinacija from '@/components/Destinacija.vue';
+import store from "@/store.js";
 
+let kartice = []; 
+
+kartice = [
+  {grad: 'Zagreb', drzava: 'Hrvatska', glavnaSlika: 'https://media.istockphoto.com/id/613245222/photo/zagreb-cathedral-aerial-view.jpg?s=612x612&w=0&k=20&c=fWFAmfzzL_dHiXN35AL4kpz92yN3tkRIMxzZ9lPuIbE='},
+  {grad: 'Pula', drzava: 'Hrvatska', glavnaSlika: 'https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg'},
+  {grad: 'Dubrovnik', drzava: 'Hrvatska', glavnaSlika: 'https://lp-cms-production.imgix.net/2021-06/shutterstockRF_662032261.jpg'},
+  
+  
+];
 
 export default {
-  name: 'HomeView',
+  name: 'home',
+  data: function(){
+    return{
+      kartice,
+      store,
+    }
+  },
+  computed: {
+    filtriraneDestinacije(){
+      let termin = this.store.searchTerm.toLocaleLowerCase();
+      let noveKartice= []; 
+      for (let kartica of this.kartice) {
+        if (kartica.grad.toLocaleLowerCase().indexOf(termin) >=0){ // sta radi index of? on u arrayu kartice trazi koji je index od termina(zagrb npr.) i njegov index je 0 i to je zapravo output i time se zadovoljava if selekcija i krece dalje
+          noveKartice.push(kartica);
+          
+        }
+  
+    }
+    return noveKartice;
+  }
+  
+  },
   components: {
-    HelloWorld
+    Destinacija
   }
 }
+
 </script>
+

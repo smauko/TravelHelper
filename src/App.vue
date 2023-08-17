@@ -5,7 +5,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <router-link class="nav-link" to="/">Home </router-link> 
+        <router-link class="nav-link" to="/home">Home </router-link> 
       </li>
       <li class="nav-item">
      <router-link class="nav-link" to="/signin">Sign In</router-link> 
@@ -17,7 +17,7 @@
         <router-link class="nav-link" to="/signup">Sign Up</router-link>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" @click="logout()">Log Out</a>
+        <a href="/home" class="nav-link" @click="logout()">Log Out</a>
       </li>
     </ul>
   </div>
@@ -39,9 +39,7 @@ import { auth } from '@/firebase';
 export default {
   name: 'app',
   data() {
-    return {
-      searchText: 'emaila',
-    };
+    
   },
   methods: {
     isLogedIn() {
