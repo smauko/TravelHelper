@@ -14,7 +14,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" v-model="ime" id="firstName" class="form-control form-control-lg" required />
+                    <input type="text" v-model="ime" id="firstName" class="form-control form-control-lg" />
                     <label class="form-label" for="firstName" >First Name</label>
                   </div>
 
@@ -22,7 +22,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" v-model="prezime" id="lastName" class="form-control form-control-lg" required />
+                    <input  type="text" v-model="prezime" id="lastName" class="form-control form-control-lg"  />
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
 
@@ -33,7 +33,7 @@
                 <div class="col-md-6 mb-4 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" v-model="datum_rodenja" class="form-control form-control-lg" id="birthdayDate" required />
+                    <input required type="date" v-model="datum_rodenja" class="form-control form-control-lg" id="birthdayDate"  />
                     <label for="birthdayDate" class="form-label">Birthday</label>
                   </div>
 
@@ -67,11 +67,12 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div class="form-outline">
-                    <input type="email" v-model="email" id="emailAddress" class="form-control form-control-lg" required />
+                    <input type="email" v-model="email" id="emailAddress" class="form-control form-control-lg"  />
                     <label class="form-label" for="emailAddress">Email</label>
+                    
                   </div>
                   <div class="form-outline">
-                    <input type="password" v-model="pass" id="password" class="form-control form-control-lg" required />
+                    <input type="password" v-model="pass" id="password" class="form-control form-control-lg"  />
                     <label class="form-label" for="password">Lozinka </label>
                   </div>
                   
@@ -79,12 +80,12 @@
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
-                    <input  id="username" v-model="username" class="form-control form-control-lg" required />
+                    <input  id="username" v-model="username" class="form-control form-control-lg"  />
                     <label class="form-label" for="username">Korisničko ime</label>
                   </div>
                   
                   <div class="form-outline">
-                    <input type="password" v-model="ponovljenipass" id="passwordagain" class="form-control form-control-lg" required />
+                    <input type="password" v-model="ponovljenipass" id="passwordagain" class="form-control form-control-lg"  />
                     <label class="form-label" for="passwordagain">Ponovi lozinku </label>
                   </div>
                 </div>
@@ -102,6 +103,7 @@
 </section>
   </template>
 <style>
+
 .gradient-custom {
     /* fallback for old browsers */
     background: #f093fb;
@@ -127,6 +129,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
     data () {
       
       return {
+        // iz v-modela sprema u ove varijable
         ime:'',
         prezime:'',
         datum_rodenja:'',
@@ -143,6 +146,14 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
         },
         signup() {
           const auth = getAuth();
+          if(this.pass != this.ponovljenipass){
+            alert("Lozinke nisu iste, pokušaj ponovno.");
+          }
+          else if(this.pass.length <6) {
+            alert("Lozinka mora biti duža!");
+            
+          }
+          else{
           createUserWithEmailAndPassword(auth,this.email, this.pass)
           .then((userCredential) => {
           // Signed in 
@@ -150,14 +161,14 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
           const ime = this.ime;
 					const prezime = this.prezime;
           this.$router.push("/home");
-         
+          
           })
           .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(error, errorCode, errorMessage);
           
-  });
+  });}
         },
     }};
 

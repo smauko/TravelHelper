@@ -11,8 +11,8 @@
       
       <div class="row">
   
-    <Destinacija class="col" v-for="destinacije in filtriraneDestinacije" :key="destinacije.glavnaSlika"  :info="destinacije" />
-
+    <Destinacija class="col-md-3 mb-3" v-for="destinacije in filtriraneDestinacije" :key="destinacije.glavnaSlika"  :info="destinacije" />
+        
   
 </div>
   </div>
@@ -35,7 +35,7 @@ kartice = [
   {grad: 'Zagreb', drzava: 'Hrvatska', glavnaSlika: 'https://media.istockphoto.com/id/613245222/photo/zagreb-cathedral-aerial-view.jpg?s=612x612&w=0&k=20&c=fWFAmfzzL_dHiXN35AL4kpz92yN3tkRIMxzZ9lPuIbE='},
   {grad: 'Pula', drzava: 'Hrvatska', glavnaSlika: 'https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg'},
   {grad: 'Dubrovnik', drzava: 'Hrvatska', glavnaSlika: 'https://lp-cms-production.imgix.net/2021-06/shutterstockRF_662032261.jpg'},
-  
+ 
   
 ];
 
