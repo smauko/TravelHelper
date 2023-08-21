@@ -2,7 +2,7 @@
  <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="center">
         <div class="card bg-white text-black" style="border-radius: 1rem; width:40rem;">
           <div class="card-body p-4 p-md-5 text-center">
 
@@ -22,7 +22,7 @@
               </div>
               <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">Forgot password?</a></p>
               <div class="mt-4 pt-2">
-                <button class="btn btn-primary btn-lg" @click="login" type="button">Submit</button>
+                <button class="btn btn-primary btn-lg" @click="login">Submit</button>
               
               <p class="mb-0">Don't have an account? <a href="/signup" class="text-blue-50 fw-bold">Sign Up</a>
               </p>
@@ -37,7 +37,13 @@
 </section>
 </template>
 
-<style>.gradient-custom {
+<style>
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.gradient-custom {
 /* fallback for old browsers */
 background: #f093fb;
 
