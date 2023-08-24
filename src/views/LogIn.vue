@@ -8,7 +8,7 @@
 
             <div style="margin-bottom: -3%;" class="mt-md-1 pb-5">
 
-              <h2 class="fw-bold mx-auto text-uppercase">SIGN IN</h2>
+              <h2 class="fw-bold mx-auto text-uppercase">Login</h2>
               <p class="text-black-50 mb-5">Upišite svoj e-mail i lozinku!</p>
 
               <div class="form-outline form-black mb-4">
@@ -73,7 +73,8 @@ export default{
     
 			signInWithEmailAndPassword(auth, this.email, this.pass)
 				.then(() => {
-					this.$router.push("/home");
+          alert("Uspješna prijava!   :)")
+					//this.$router.replace("/home"); // u pushu mzes ici nazad sta nema smisla ako si ulogiran
 				})
 				.catch((error) => {
 					alert(error.message);

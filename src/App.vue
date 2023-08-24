@@ -18,19 +18,20 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/home">Home</router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/signin">Sign In</router-link>
+          <li v-if="!store.currentUser" class="nav-item">
+            <router-link class="nav-link" to="/login">Login</router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!store.currentUser" class="nav-item">
             <router-link class="nav-link" to="/signup">Sign Up</router-link>
           </li>
-          <li class="nav-item">
-            <a href="/home" class="nav-link" @click="logout()">Log Out</a>
+          <li v-if="store.currentUser" class="nav-item">
+            <a href="#" class="nav-link" @click.prevent="logout()" >Log out</a>
           </li>
         </ul>
       </div>
     </nav>
     </div>
+   
   <router-view></router-view>
 </div>
 </template>
@@ -52,26 +53,47 @@
 
 <script>
 import { auth } from '@/firebase';
+import store from '@/store';
+import router from '@/router';
+
+const currentRoute = router.currentRoute;
 
 
 
 export default {
   name: 'app',
   data() {
+    return{
+      store,
+    };
     
   },
   methods: {
     isLogedIn() {
       auth.onAuthStateChanged(function(user) {
         if (user) {
-          console.log("***", user.email);
+          store.currentUser=user.email;
+          console.log(store.currentUser, user.email );
+
+            if (!currentRoute.meta.neSmijeUcSaLogin) {
+            router.push({ name: 'home' });
+ }
         } else {
-          console.log("no email");
+          store.currentUser=null;
+          console.log("nema korisnik");
         }
       });
     },
     logout(){
-      auth.signOut();
+      auth.signOut().then(() => {
+        if (this.$route.name !== 'home') { // ako se nalazi negdje drugdje kao profil ili favoriti pa onda da se samo vrati na home
+          this.$router.push('/home');
+        }
+        else {
+          window.location.reload();
+        }
+        
+      });
       
     }
   },

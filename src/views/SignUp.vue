@@ -14,7 +14,7 @@
                  <div class="col-md-6 mb-4">
  
                    <div class="form-outline">
-                     <input type="text" v-model="ime" id="firstName" class="form-control form-control-lg" />
+                     <input  type="text" v-model="ime" id="firstName" class="form-control form-control-lg" />
                      <label class="form-label" for="firstName" >First Name</label>
                    </div>
  
@@ -33,7 +33,7 @@
                  <div class="col-md-6 mb-4 d-flex align-items-center">
  
                    <div class="form-outline datepicker w-100">
-                     <input required type="date" v-model="datum_rodenja" class="form-control form-control-lg" id="birthdayDate"  />
+                     <input  type="date" v-model="datum_rodenja" class="form-control form-control-lg" id="birthdayDate"  />
                      <label for="birthdayDate" class="form-label">Birthday</label>
                    </div>
  
@@ -44,19 +44,19 @@
  
                    <div class="form-check form-check-inline">
                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                       value="option1" checked required />
+                       value="option1" checked  />
                      <label class="form-check-label" for="femaleGender">Female</label>
                    </div>
  
                    <div class="form-check form-check-inline">
                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                       value="option2" required />
+                       value="option2"  />
                      <label class="form-check-label" for="maleGender">Male</label>
                    </div>
  
                    <div class="form-check form-check-inline">
                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                       value="option3" required />
+                       value="option3"  />
                      <label class="form-check-label" for="otherGender">Other</label>
                    </div>
  
@@ -67,12 +67,12 @@
                  <div class="col-md-6 mb-4 pb-2">
  
                    <div class="form-outline">
-                     <input type="email" v-model="email" id="emailAddress" class="form-control form-control-lg"  />
+                     <input  type="email" v-model="email" id="emailAddress" class="form-control form-control-lg"  />
                      <label class="form-label" for="emailAddress">Email</label>
                      
                    </div>
                    <div class="form-outline">
-                     <input type="password" v-model="pass" id="password" class="form-control form-control-lg"  />
+                     <input  type="password" v-model="pass" id="password" class="form-control form-control-lg"  />
                      <label class="form-label" for="password">Lozinka </label>
                    </div>
                    
@@ -85,16 +85,17 @@
                    </div>
                    
                    <div class="form-outline">
-                     <input type="password" v-model="ponovljenipass" id="passwordagain" class="form-control form-control-lg"  />
+                     <input  type="password" v-model="ponovljenipass" id="passwordagain" class="form-control form-control-lg"  />
                      <label class="form-label" for="passwordagain">Ponovi lozinku </label>
                    </div>
                  </div>
                </div>
+              </form>
                <div class="pt-2 text-center" style="margin-bottom: -5%; margin-top: -3%;" > 
                  <button class="btn btn-primary btn-lg" @click="signup" >Submit</button>
                </div>
  
-             </form>
+             
            </div>
          </div>
        </div>
@@ -103,7 +104,12 @@
  </section>
    </template>
  <style>
- 
+ .center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
  .gradient-custom {
      /* fallback for old browsers */
      background: #f093fb;
@@ -121,7 +127,7 @@
      }</style>
  
  <script>
- import app from '@/firebase';
+ 
  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
  
    export default{
@@ -159,18 +165,20 @@
            // Signed in 
            const user = userCredential.user;
            const ime = this.ime;
+           alert("Uspješna registracija");
            const prezime = this.prezime;
-           this.$router.push("/home");
+           // this.$router.replace("/home");
            
            })
            .catch((error) => {
            const errorCode = error.code;
            const errorMessage = error.message;
+           alert(error, errorCode, errorMessage);
            console.log(error, errorCode, errorMessage);
            
-   });}
+   });}}
          },
-     }};
+     };
  
  
  </script>
