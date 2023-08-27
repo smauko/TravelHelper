@@ -130,6 +130,7 @@
  
  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
  
+ 
    export default{
      name: "SignUp",
      data () {
@@ -167,7 +168,7 @@
            const ime = this.ime;
            alert("Uspješna registracija");
            const prezime = this.prezime;
-           // this.$router.replace("/home");
+           this.$router.replace("/home");
            
            })
            .catch((error) => {

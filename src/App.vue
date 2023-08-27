@@ -29,6 +29,7 @@
           </li>
         </ul>
       </div>
+      <div><h4 v-if="store.currentUser" >Pozdrav {{ store.currentUser }}</h4></div>
     </nav>
     </div>
    
@@ -103,5 +104,3 @@ export default {
 };
 
 </script>
-
-

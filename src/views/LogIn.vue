@@ -74,7 +74,7 @@ export default{
 			signInWithEmailAndPassword(auth, this.email, this.pass)
 				.then(() => {
           alert("Uspješna prijava!   :)")
-					//this.$router.replace("/home"); // u pushu mzes ici nazad sta nema smisla ako si ulogiran
+					this.$router.replace("/home"); // u pushu mzes ici nazad sta nema smisla ako si ulogiran
 				})
 				.catch((error) => {
 					alert(error.message);

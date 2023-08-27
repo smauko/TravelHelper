@@ -29,6 +29,7 @@
 import Destinacija from '@/components/Destinacija.vue';
 import store from "@/store.js";
 
+
 let kartice = []; 
 
 kartice = [
@@ -38,7 +39,6 @@ kartice = [
  
   
 ];
-
 export default {
   name: 'home',
   data: function(){
@@ -46,6 +46,9 @@ export default {
       kartice,
       store,
     }
+  },
+  methods: {
+  
   },
   computed: {
     filtriraneDestinacije(){

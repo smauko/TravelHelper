@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -12,9 +12,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/HomeView.vue'),
-    meta:{
-      neSmijeUcSaLogin:false,
-    },
+    meta: {
+      neSmijeUcSaLogin:false
+    }
     
   },
   {
@@ -24,9 +24,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/HomeView.vue'),
-    meta:{
-      neSmijeUcSaLogin:false,
-    },
+    meta: {
+      neSmijeUcSaLogin:false
+    }
     
   },
   {
@@ -36,9 +36,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/LogIn.vue'),
-    meta:{
-      neSmijeUcSaLogin:true,
-    },
+    meta: {
+      neSmijeUcSaLogin:true
+    }
   },
   {
     path: '/signup',
@@ -47,9 +47,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/SignUp.vue'),
-    meta:{
-      neSmijeUcSaLogin:true,
-    },
+    meta: {
+      neSmijeUcSaLogin:true
+    } 
 
   },
   {
