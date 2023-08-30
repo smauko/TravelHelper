@@ -1,10 +1,9 @@
 import router from '@/router';
 
-export default {
+export default { 
     name: 'Routing',
     created() {
-        // Call the zavrsno method when the component is created
-        this.zavrsno();
+        this.zavrsno(); // pozovi kada je gotovo
     },
     methods: {
         zavrsno() {

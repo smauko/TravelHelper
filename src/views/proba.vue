@@ -1,4 +1,6 @@
 <template>
-    <p>psuu</p>
+  <v-app>
+    <v-text-field outlined label="Img Url(ZASADA)"></v-text-field>
+  </v-app>
 </template>
 

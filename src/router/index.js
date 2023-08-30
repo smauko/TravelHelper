@@ -58,8 +58,33 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/proba.vue')
-  }
+    component: () => import(/* webpackChunkName: "about" */ '../views/proba.vue'),
+    meta: {
+      neSmijeUcSaLogin:false
+    } 
+  },
+  {
+    path: '/prikaz-destinacije',
+    name: 'prikaz-destinacije',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/PrikazDestinacije.vue'),
+    meta: {
+      neSmijeUcSaLogin:false
+    } 
+  },
+  {
+    path: '/dodaj-destinaciju',
+    name: 'dodaj-destinaciju',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/DodajDestinaciju.vue'),
+    meta: {
+      neSmijeUcSaLogin:false
+    } 
+  },
 ]
 
 const router = new VueRouter({
@@ -71,7 +96,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log(" stara ruta je ",from.name, " nova ruta je ",to.name, " korisnik je ", store.currentUser );
   const userLogged= store.currentUser != null; // ako je ulogiran biti ce true, ako nije false
-
+  store.ruta = to.meta.neSmijeUcSaLogin;
    if(userLogged && to.meta.neSmijeUcSaLogin){
     console.log(userLogged, to.meta.neSmijeUcSaLogin, store.currentUser, 'nijeprosao');
     next('home');

@@ -2,7 +2,7 @@
   
   <div class="city-wrapper">
   <div class="container" style="margin-top: 55px;">
-    <a href="/signup" style="color: black; text-decoration: none;">
+    <a href="/dodaj-destinaciju" style="color: black; text-decoration: none;">
     <div class="city-container">
       <img style="text-align: center;" :src="info.glavnaSlika" alt="City Image">
       
