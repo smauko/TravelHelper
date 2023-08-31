@@ -7,22 +7,14 @@
       <v-form style="margin-top: 60px; margin-left: -60px">
         <v-row>
           <v-col cols="12" sm="6">
-            <v-img
-              src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-              style="
-                border: 2px solid black;
-                height: 350px;
-                width: 350px;
-                margin-left: 20px;
-              "
-            ></v-img>
+            <croppa
+              :height="350"
+              :width="350"
+              placeholder="Učitaj sliku!"
+              v-model="pravaSlika"
+            ></croppa>
           </v-col>
           <v-col sm="4" style="margin-left: -115px">
-            <v-text-field
-              outlined
-              v-model="img_url"
-              label="Img Url(ZASADA)"
-            ></v-text-field>
             <v-text-field
               outlined
               v-model="ime_grada"
@@ -108,39 +100,64 @@
 </style>
 
 <script>
-import { db } from "@/firebase";
+import { db, storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
 import { addDoc, collection } from "firebase/firestore/lite";
 
 export default {
   data() {
     return {
-      img_url: "",
       ime_grada: "",
       ime_drzave: "",
       opis_destinacije: "",
       odabrane_vrste: [], // U array stavljamo vrste destinacije
+      pravaSlika: null,
     };
   },
   methods: {
     async DodajNovuDestinaciju() {
-      const imgUrl = this.img_url;
-      const nazivGrada = this.ime_grada;
-      const nazivDrzave = this.ime_drzave;
-      const opis_Destinacije = this.opis_destinacije;
-      const vrstaDestinacija = this.odabrane_vrste;
+      this.pravaSlika.generateBlob((blobData) => {
+        let Blobby = blobData; // size blob ide u Blobby
 
-      const destinacijeDocReferance = await addDoc(
-        collection(db, "destinacije"),
-        {
-          ImageUrl: imgUrl,
-          Grad: nazivGrada,
-          Drzava: nazivDrzave,
-          OpisDestinacije: opis_Destinacije,
-          VrstaDestinacije: vrstaDestinacija,
-        }
-      );
-      console.log("Document written with ID: ", destinacijeDocReferance.id);
-      this.$router.replace("/home");
+        let imageName = (
+          "destinacije/" +
+          this.ime_grada +
+          this.ime_drzave +
+          "/" +
+          "GLAVNA.png"
+        ).replace(/\s/g, ""); // generiranje imena za svaku sliku
+        console.log(imageName);
+
+        const storageRef = ref(storage, imageName);
+        uploadBytes(storageRef, Blobby).then((snapshot) => {
+          getDownloadURL(storageRef).then(async (url) => {
+            console.log("Javni link", url);
+
+            const nazivGrada = this.ime_grada;
+            const nazivDrzave = this.ime_drzave;
+            const opis_Destinacije = this.opis_destinacije;
+            const vrstaDestinacija = this.odabrane_vrste;
+            const imgUrl = url;
+            console.log(imgUrl);
+
+            const destinacijeDocReferance = await addDoc(
+              collection(db, "destinacije"),
+              {
+                ImageUrl: imgUrl,
+                Grad: nazivGrada,
+                Drzava: nazivDrzave,
+                OpisDestinacije: opis_Destinacije,
+                VrstaDestinacije: vrstaDestinacija,
+              }
+            );
+            console.log(
+              "Document written with ID: ",
+              destinacijeDocReferance.id
+            );
+            this.$router.replace("/home");
+          });
+        });
+      });
+      return;
     },
   },
 };
