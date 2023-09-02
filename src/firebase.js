@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, addDoc, getDoc, setDoc, getDocs, getCount, getFirestore, collection } from 'firebase/firestore/lite';
+import { doc, addDoc, getDoc,deleteDoc, setDoc, getDocs, getCount, getFirestore, collection } from 'firebase/firestore/lite';
 import { getAuth, updatePassword, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, confirmPasswordReset, beforeAuthStateChanged, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -34,6 +34,7 @@ export {
     ref,
     uploadBytes,
     getDownloadURL,
+    deleteDoc,
     signOut,
     updatePassword
 

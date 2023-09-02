@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <h2 class="mb-4 pb-2 pb-md-0 mb-md-2 text-center">
-        Dodaj novu destinaciju
-      </h2>
+      <h2 class="mb-4 pb-2 pb-md-0 mb-md-2 text-center">Uredi destinaciju</h2>
       <v-form style="margin-top: 60px; margin-left: -60px">
         <v-row>
           <v-col cols="12" sm="6">
@@ -15,11 +13,9 @@
             ></croppa>
           </v-col>
           <v-col sm="4" style="margin-left: -115px">
-            <v-text-field
-              outlined
-              v-model="ime_Grada"
-              label="Ime Grada"
-            ></v-text-field>
+            <v-text-field outlined v-model="ime_Grada" label="Ime Grada">
+              {{ ime_Grada }}</v-text-field
+            >
             <v-text-field
               outlined
               v-model="ime_drzave"
@@ -30,7 +26,10 @@
               v-model="opis_destinacije"
               label="Kratki opis"
             ></v-textarea> </v-col
-          ><v-col sm="2" style="margin-left: 80px; margin-top: -10px">
+          ><v-col
+            sm="2"
+            style="margin-left: 80px; margin-top: -10px !important"
+          >
             <h6>Odaberite vrstu destinacije (min. 1):</h6>
             <v-checkbox
               v-model="odabrane_vrste"
@@ -41,44 +40,44 @@
               v-model="odabrane_vrste"
               value="Šumska"
               label="Šumska"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
               value="Gradska"
               label="Gradska"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
               value="Kulturno/Povjesna"
               label="Kulturno/Povjesna"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
               value="Seoska"
               label="Seoska"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
               value="Morska"
               label="Morska"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
               value="Pustinjska"
               label="Pustinjska"
-              style="margin-top: -10px"
+              style="margin-top: -10px !important"
             ></v-checkbox>
           </v-col>
         </v-row>
         <v-row>
           <v-col sm="2" style="margin-left: auto; margin-right: auto">
             <v-btn
-              @click="DodajNovuDestinaciju"
+              @click="UrediPodatke"
               class="d-flex justify-center align-center"
               >Submit</v-btn
             ></v-col
@@ -89,19 +88,9 @@
   </v-app>
 </template>
 
-
-
-<style>
-.DodajSliku {
-  border-style: solid;
-  width: 150px;
-  height: 150px;
-}
-</style>
-
 <script>
+import { collection, getDocs, doc, setDoc } from "firebase/firestore/lite";
 import { db, storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
-import { addDoc, collection } from "firebase/firestore/lite";
 
 export default {
   data() {
@@ -113,8 +102,30 @@ export default {
       pravaSlika: null,
     };
   },
+  mounted() {
+    this.dovatiDestinaciju();
+  },
   methods: {
-    async DodajNovuDestinaciju() {
+    async dovatiDestinaciju() {
+      const idDestinacije = this.$route.params.id;
+      console.log(idDestinacije);
+      this.prikazDestinacije = {};
+      const querySnapshot = await getDocs(collection(db, "destinacije"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (doc.id == idDestinacije) {
+          this.ime_drzave = data.Drzava;
+          this.ime_Grada = data.Grad;
+          this.opis_destinacije = data.OpisDestinacije;
+
+          this.odabrane_vrste = data.VrstaDestinacije;
+        } else {
+          return;
+        }
+      });
+    },
+    async UrediPodatke() {
+      const idDestinacije = this.$route.params.id;
       this.pravaSlika.generateBlob((blobData) => {
         let Blobby = null;
         Blobby = blobData; // size blob ide u Blobby
@@ -132,7 +143,6 @@ export default {
         uploadBytes(storageRef, Blobby).then((snapshot) => {
           getDownloadURL(storageRef).then(async (url) => {
             console.log("Javni link", url);
-
             const nazivGrada = this.ime_Grada;
             const nazivDrzave = this.ime_drzave;
             const opis_Destinacije = this.opis_destinacije;
@@ -146,29 +156,23 @@ export default {
               vrstaDestinacija.length > 0 &&
               Blobby != null
             ) {
-              const destinacijeDocReferance = await addDoc(
-                collection(db, "destinacije"),
-                {
-                  ImageUrl: imgUrl,
-                  Grad: nazivGrada,
-                  Drzava: nazivDrzave,
-                  OpisDestinacije: opis_Destinacije,
-                  VrstaDestinacije: vrstaDestinacija,
-                }
-              );
-              console.log(
-                "Document written with ID: ",
-                destinacijeDocReferance.id
-              );
-              this.$router.replace("/home");
+              await setDoc(doc(db, "destinacije", idDestinacije), {
+                ImageUrl: imgUrl,
+                Grad: nazivGrada,
+                Drzava: nazivDrzave,
+                OpisDestinacije: opis_Destinacije,
+                VrstaDestinacije: vrstaDestinacija,
+              });
+              console.log("Uspješno uređivanje ");
+              this.$router.replace("/prikaz-destinacije/" + idDestinacije);
             } else {
               alert("Ispuni sva polja!!");
             }
           });
         });
       });
-      return;
     },
   },
 };
 </script>
+

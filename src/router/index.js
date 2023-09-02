@@ -69,12 +69,13 @@ const routes = [
     } 
   },
   {
-    path: '/prikaz-destinacije:id',
+    path: '/prikaz-destinacije/:id',
     name: 'prikaz-destinacije',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/PrikazDestinacije.vue'),
+    props: true,
     meta: {
       neSmijeUcSaLogin: false,
       neSmijeUcBezAdmin: false
@@ -87,6 +88,18 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DodajDestinaciju.vue'),
+    meta: {
+      neSmijeUcSaLogin: false,
+      neSmijeUcBezAdmin: true
+    } 
+  },
+   {
+    path: '/uredi-destinaciju/:id',
+    name: 'uredi-destinaciju',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/UrediDestinaciju.vue'),
     meta: {
       neSmijeUcSaLogin: false,
       neSmijeUcBezAdmin: true

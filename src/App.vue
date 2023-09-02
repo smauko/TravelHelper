@@ -24,6 +24,11 @@
             <li v-if="!store.currentUser" class="nav-item">
               <router-link class="nav-link" to="/signup">Sign Up</router-link>
             </li>
+            <li v-if="store.adminUser" class="nav-item">
+              <router-link class="nav-link" to="/dodaj-destinaciju"
+                >Nova Destinacija</router-link
+              >
+            </li>
             <li v-if="store.currentUser" class="nav-item">
               <a href="#" class="nav-link" @click.prevent="logout()">Log out</a>
             </li>
@@ -71,6 +76,9 @@ export default {
           store.currentUser = user.email;
           console.log(store.currentUser, user.email);
           console.log(store.ruta);
+          if (store.currentUser == "admin@test.com") {
+            store.adminUser = true;
+          }
 
           if (store.ruta) {
             router.push({ name: "home" });

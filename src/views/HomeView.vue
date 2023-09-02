@@ -19,9 +19,9 @@
       <div class="row">
         <Destinacija
           class="col-md-3 mb-3"
-          v-for="destinacije in filtriraneDestinacije"
-          :key="destinacije.glavnaSlika"
-          :info="destinacije"
+          v-for="destinacijee in filtriraneDestinacije"
+          :key="destinacijee.glavnaSlika"
+          :info="destinacijee"
         />
       </div>
     </div>
@@ -37,14 +37,6 @@ import store from "@/store.js";
 import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "@/firebase";
 
-/*
-kartice = [
-  {grad: 'Zagreb', drzava: 'Hrvatska', glavnaSlika: 'https://media.istockphoto.com/id/613245222/photo/zagreb-cathedral-aerial-view.jpg?s=612x612&w=0&k=20&c=fWFAmfzzL_dHiXN35AL4kpz92yN3tkRIMxzZ9lPuIbE='},
-  {grad: 'Pula', drzava: 'Hrvatska', glavnaSlika: 'https://www.pulainfo.hr/wp/wp-content/uploads/2017/05/PROFILNA-SLIKA.jpg'},
-  {grad: 'Dubrovnik', drzava: 'Hrvatska', glavnaSlika: 'https://lp-cms-production.imgix.net/2021-06/shutterstockRF_662032261.jpg'},
- 
-  
-];*/
 export default {
   name: "home",
   data: function () {
@@ -55,6 +47,7 @@ export default {
   },
   mounted() {
     this.dohvatiSveDestinacije();
+    console.log(this.kartice);
   },
   methods: {
     async dohvatiSveDestinacije() {
@@ -62,8 +55,9 @@ export default {
       const querySnapshot = await getDocs(collection(db, "destinacije"));
       querySnapshot.forEach((doc) => {
         const data = doc.data();
+
         this.kartice.push({
-          id: data.id,
+          id: doc.id,
           glavnaSlika: data.ImageUrl,
           drzava: data.Drzava,
           grad: data.Grad,
