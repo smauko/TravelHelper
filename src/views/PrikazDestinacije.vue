@@ -46,6 +46,9 @@
             ><v-btn v-if="store.adminUser" @click="IzbrisiDestinaciju"
               >Izbriši</v-btn
             ></v-col
+          >
+          <v-col sm="2"
+            ><v-btn v-if="store.currentUser">Dodaj u favorite</v-btn></v-col
           ></v-row
         >
       </v-container>

@@ -26,6 +26,7 @@
               label="Ime države"
             ></v-text-field>
             <v-textarea
+              counter
               outlined
               v-model="opis_destinacije"
               label="Kratki opis"
@@ -113,6 +114,7 @@ export default {
       pravaSlika: null,
     };
   },
+
   methods: {
     async DodajNovuDestinaciju() {
       this.pravaSlika.generateBlob((blobData) => {
@@ -146,21 +148,27 @@ export default {
               vrstaDestinacija.length > 0 &&
               Blobby != null
             ) {
-              const destinacijeDocReferance = await addDoc(
-                collection(db, "destinacije"),
-                {
-                  ImageUrl: imgUrl,
-                  Grad: nazivGrada,
-                  Drzava: nazivDrzave,
-                  OpisDestinacije: opis_Destinacije,
-                  VrstaDestinacije: vrstaDestinacija,
-                }
-              );
-              console.log(
-                "Document written with ID: ",
-                destinacijeDocReferance.id
-              );
-              this.$router.replace("/home");
+              if (opis_Destinacije.length > 1650) {
+                alert(
+                  "Maksimalan broj znakova za opis destinacije je 1200 znakova!"
+                );
+              } else {
+                const destinacijeDocReferance = await addDoc(
+                  collection(db, "destinacije"),
+                  {
+                    ImageUrl: imgUrl,
+                    Grad: nazivGrada,
+                    Drzava: nazivDrzave,
+                    OpisDestinacije: opis_Destinacije,
+                    VrstaDestinacije: vrstaDestinacija,
+                  }
+                );
+                console.log(
+                  "Document written with ID: ",
+                  destinacijeDocReferance.id
+                );
+                this.$router.replace("/home");
+              }
             } else {
               alert("Ispuni sva polja!!");
             }

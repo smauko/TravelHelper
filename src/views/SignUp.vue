@@ -65,12 +65,11 @@
                         type="radio"
                         name="inlineRadioOptions"
                         id="femaleGender"
-                        value="option1"
+                        value="Žensko"
+                        v-model="spol"
                         checked
                       />
-                      <label class="form-check-label" for="femaleGender"
-                        >Female</label
-                      >
+                      <label class="form-check-label">Female</label>
                     </div>
 
                     <div class="form-check form-check-inline">
@@ -79,7 +78,8 @@
                         type="radio"
                         name="inlineRadioOptions"
                         id="maleGender"
-                        value="option2"
+                        value="Muško"
+                        v-model="spol"
                       />
                       <label class="form-check-label" for="maleGender"
                         >Male</label
@@ -92,7 +92,8 @@
                         type="radio"
                         name="inlineRadioOptions"
                         id="otherGender"
-                        value="option3"
+                        v-model="spol"
+                        value="Ostalo"
                       />
                       <label class="form-check-label" for="otherGender"
                         >Other</label
@@ -196,6 +197,8 @@
  
  <script>
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db, storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
+import { addDoc, setDoc, doc, collection } from "firebase/firestore/lite";
 
 export default {
   name: "SignUp",
@@ -207,6 +210,7 @@ export default {
       datum_rodenja: "",
       email: "",
       username: "",
+      spol: "",
       pass: "",
       ponovljenipass: "",
     };
@@ -224,13 +228,36 @@ export default {
         alert("Lozinka mora biti duža!");
       } else {
         createUserWithEmailAndPassword(auth, this.email, this.pass)
-          .then((userCredential) => {
+          .then(async (userCredential) => {
             // Signed in
             const user = userCredential.user;
             const ime = this.ime;
-            alert("Uspješna registracija");
             const prezime = this.prezime;
-            this.$router.replace("/home");
+            const datum_rodenja = this.datum_rodenja;
+            const username = this.username;
+            const spol = this.spol;
+            const email = this.email;
+            if (
+              ime != "" &&
+              prezime != "" &&
+              datum_rodenja != "" &&
+              username != "" &&
+              spol != ""
+            ) {
+              await setDoc(doc(db, "korisnici", email), {
+                Ime: ime,
+                Prezime: prezime,
+                DatumRodenja: datum_rodenja,
+                Username: username,
+                Spol: spol,
+                Email: email,
+              });
+              console.log("Uspjesno dodano ");
+              alert("Uspješna registracija");
+              this.$router.replace("/home");
+            } else {
+              alert("Upisi sve podatke!");
+            }
           })
           .catch((error) => {
             const errorCode = error.code;

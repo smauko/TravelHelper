@@ -105,6 +105,30 @@ const routes = [
       neSmijeUcBezAdmin: true
     } 
   },
+  {
+    path: '/profil-korisnika/:id',
+    name: 'profil-korisnika',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProfilKorisnika.vue'),
+    meta: {
+      neSmijeUcSaLogin: false,
+      neSmijeUcBezAdmin: true
+    }
+  },
+  {
+    path: '/uredi-profil/:id',
+    name: 'uredi-profil',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/UrediProfil.vue'),
+    meta: {
+      neSmijeUcSaLogin: false,
+      neSmijeUcBezAdmin: true
+    }
+  },
 ]
 
 const router = new VueRouter({
@@ -116,7 +140,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log(" stara ruta je ",from.name, " nova ruta je ",to.name, " korisnik je ", store.currentUser );
   const userLogged = store.currentUser != null; // ako je ulogiran biti ce true, ako nije false
-  const adminLogged = store.currentU
+  // const adminLogged = store.currentU
+  store.ime_rute = to.name;
   store.ruta = to.meta.neSmijeUcSaLogin;
    if(userLogged && to.meta.neSmijeUcSaLogin){
     console.log(userLogged, to.meta.neSmijeUcSaLogin, store.currentUser, 'nijeprosao');

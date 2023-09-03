@@ -22,6 +22,7 @@
               label="Ime države"
             ></v-text-field>
             <v-textarea
+              counter
               outlined
               v-model="opis_destinacije"
               label="Kratki opis"
@@ -156,15 +157,21 @@ export default {
               vrstaDestinacija.length > 0 &&
               Blobby != null
             ) {
-              await setDoc(doc(db, "destinacije", idDestinacije), {
-                ImageUrl: imgUrl,
-                Grad: nazivGrada,
-                Drzava: nazivDrzave,
-                OpisDestinacije: opis_Destinacije,
-                VrstaDestinacije: vrstaDestinacija,
-              });
-              console.log("Uspješno uređivanje ");
-              this.$router.replace("/prikaz-destinacije/" + idDestinacije);
+              if (opis_Destinacije.length > 1650) {
+                alert(
+                  "Maksimalan broj znakova za opis destinacije je 1200 znakova!"
+                );
+              } else {
+                await setDoc(doc(db, "destinacije", idDestinacije), {
+                  ImageUrl: imgUrl,
+                  Grad: nazivGrada,
+                  Drzava: nazivDrzave,
+                  OpisDestinacije: opis_Destinacije,
+                  VrstaDestinacije: vrstaDestinacija,
+                });
+                console.log("Uspješno uređivanje ");
+                this.$router.replace("/prikaz-destinacije/" + idDestinacije);
+              }
             } else {
               alert("Ispuni sva polja!!");
             }
