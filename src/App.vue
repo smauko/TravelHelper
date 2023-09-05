@@ -124,6 +124,8 @@ export default {
             if (store.rutaAdmin) {
               router.push({ name: "home" });
             }
+          } else {
+            store.adminUser = true;
           }
 
           if (store.ruta) {
