@@ -51,8 +51,8 @@
             ></v-checkbox>
             <v-checkbox
               v-model="odabrane_vrste"
-              value="Kulturno/Povjesna"
-              label="Kulturno/Povjesna"
+              value="Kulturno/Povijesna"
+              label="Kulturno/Povijesna"
               style="margin-top: -10px !important"
             ></v-checkbox>
             <v-checkbox
@@ -105,6 +105,7 @@ export default {
   },
   mounted() {
     this.dovatiDestinaciju();
+    console.log(this.odabrane_vrste);
   },
   methods: {
     async dovatiDestinaciju() {

@@ -1,7 +1,112 @@
 <template>
   <div style="margin-top: 30px" class="container" id="c-global">
     <div class="search">
-      <div class="d-flex">
+      <div class="input-group mb-3">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Vrsta destinacije
+        </button>
+
+        <ul class="dropdown-menu">
+          <div class="form-check">
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Gradska"
+                id="flexCheckDefault"
+                label="Gradska"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Gradska
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Planinska"
+                label="Planinska"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Planinska
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Seoska"
+                label="Seoska"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Seoska
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Kulturno/Povijesna"
+                label="Kulturno/Povijesna"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Kulturno/Povijesna
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Šumska"
+                label="Šumska"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Šumska
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Morska"
+                label="Morska"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Morska
+              </label>
+            </li>
+            <li>
+              <input
+                v-model="vrstedestinacje"
+                class="form-check-input"
+                type="checkbox"
+                value="Pustinjska"
+                label="Pustinjska"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Pustinjska
+              </label>
+            </li>
+          </div>
+        </ul>
+
         <input
           v-model="store.searchTerm"
           name="naziv"
@@ -15,6 +120,7 @@
           value="Pretraži"
         />
       </div>
+      <div class="d-flex"></div>
 
       <div class="row">
         <Destinacija
@@ -41,12 +147,14 @@ export default {
   name: "home",
   data: function () {
     return {
+      vrstedestinacje: [],
       kartice: [],
       store,
     };
   },
   mounted() {
     this.dohvatiSveDestinacije();
+    //console.log(this.kartice);
     console.log(this.kartice);
   },
   methods: {
@@ -71,6 +179,7 @@ export default {
     filtriraneDestinacije() {
       let termin = this.store.searchTerm.toLocaleLowerCase();
       let noveKartice = [];
+
       for (let kartica of this.kartice) {
         if (
           kartica.grad.toLocaleLowerCase().indexOf(termin) >= 0 ||
@@ -83,6 +192,7 @@ export default {
       return noveKartice;
     },
   },
+
   components: {
     Destinacija,
   },

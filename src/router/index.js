@@ -89,7 +89,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DodajDestinaciju.vue'),
     meta: {
-      neSmijeUcSaLogin: false,
+    
       neSmijeUcBezAdmin: true
     } 
   },
@@ -101,7 +101,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/UrediDestinaciju.vue'),
     meta: {
-      neSmijeUcSaLogin: false,
+     
       neSmijeUcBezAdmin: true
     } 
   },
@@ -113,8 +113,8 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ProfilKorisnika.vue'),
     meta: {
-      neSmijeUcSaLogin: false,
-      neSmijeUcBezAdmin: true
+      
+      neSmijeUcBezLogin: true
     }
   },
   {
@@ -125,10 +125,23 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/UrediProfil.vue'),
     meta: {
-      neSmijeUcSaLogin: false,
-      neSmijeUcBezAdmin: true
+      neSmijeUcBezLogin: true,
+    
     }
   },
+  {
+    path: '/prikaz-favorita/:id',
+    name: 'prikaz-favorita',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/PrikazFavorita.vue'),
+    meta: {
+      neSmijeUcBezLogin: true,
+  
+    }
+  },
+
 ]
 
 const router = new VueRouter({
@@ -143,6 +156,8 @@ router.beforeEach((to, from, next) => {
   // const adminLogged = store.currentU
   store.ime_rute = to.name;
   store.ruta = to.meta.neSmijeUcSaLogin;
+  store.rutaAdmin = to.meta.neSmijeUcBezAdmin;
+  store.rutaBezLogin = to.meta.neSmijeUcBezLogin;
    if(userLogged && to.meta.neSmijeUcSaLogin){
     console.log(userLogged, to.meta.neSmijeUcSaLogin, store.currentUser, 'nijeprosao');
     next('home');

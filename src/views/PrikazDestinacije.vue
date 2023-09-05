@@ -47,8 +47,23 @@
               >Izbriši</v-btn
             ></v-col
           >
-          <v-col sm="2"
-            ><v-btn v-if="store.currentUser">Dodaj u favorite</v-btn></v-col
+          <v-col sm="2" @click="DodajUFavorite"
+            ><v-btn
+              v-if="
+                store.currentUser &&
+                !store.prikazFavorita.includes(this.prikazDestinacije.id)
+              "
+              >Dodaj u favorite</v-btn
+            ></v-col
+          >
+          <v-col sm="2" @click="IzbrisiIzFavorita"
+            ><v-btn
+              v-if="
+                store.currentUser &&
+                store.prikazFavorita.includes(this.prikazDestinacije.id)
+              "
+              >Izbriši iz favorita</v-btn
+            ></v-col
           ></v-row
         >
       </v-container>
@@ -66,7 +81,15 @@ div {
 
 <script>
 import store from "@/store";
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore/lite";
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore/lite";
 import { db } from "@/firebase";
 export default {
   name: "PrikazDestinacije",
@@ -79,7 +102,7 @@ export default {
   },
   mounted() {
     this.dovatiDestinaciju();
-    console.log(this.vrstadestinacije);
+    console.log(store.prikazFavorita);
   },
   methods: {
     async dovatiDestinaciju() {
@@ -111,6 +134,24 @@ export default {
     IdiNaUredivanje() {
       const idDestinacije = this.$route.params.id;
       this.$router.push("/uredi-destinaciju/" + idDestinacije);
+    },
+    async DodajUFavorite() {
+      const idDestinacije = this.$route.params.id;
+      const KorisniciRef = doc(db, "korisnici", store.currentUser);
+
+      await updateDoc(KorisniciRef, {
+        Favoriti: arrayUnion(idDestinacije),
+      });
+      window.location.reload();
+    },
+    async IzbrisiIzFavorita() {
+      const idDestinacije = this.$route.params.id;
+      const KorisniciRef = doc(db, "korisnici", store.currentUser);
+
+      await updateDoc(KorisniciRef, {
+        Favoriti: arrayRemove(idDestinacije),
+      });
+      window.location.reload();
     },
   },
 };

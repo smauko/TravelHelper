@@ -32,7 +32,11 @@
               >
             </li>
             <li v-if="store.currentUser" class="nav-item">
-              <router-link class="nav-link" to="#">Favoriti</router-link>
+              <router-link
+                class="nav-link"
+                :to="'/prikaz-favorita/' + store.currentUser"
+                >Favoriti</router-link
+              >
             </li>
 
             <li v-if="store.adminUser" class="nav-item">
@@ -86,6 +90,7 @@ export default {
       email: "",
       username: "",
       spol: "",
+
       store,
     };
   },
@@ -108,14 +113,17 @@ export default {
             this.email = data.Email;
             this.username = data.Username;
             this.spol = data.Spol;
+            this.store.prikazFavorita = data.Favoriti;
             console.log("Document data:", docSnap.data());
           } else {
             // docSnap.data() will be undefined in this case
             console.log("No such document!");
           }
 
-          if (store.currentUser == "admin@test.com") {
-            store.adminUser = true;
+          if (store.currentUser != "admin@test.com") {
+            if (store.rutaAdmin) {
+              router.push({ name: "home" });
+            }
           }
 
           if (store.ruta) {
@@ -124,6 +132,9 @@ export default {
         } else {
           store.currentUser = null;
           console.log("nema korisnik");
+          if (store.rutaBezLogin) {
+            router.push({ name: "home" });
+          }
         }
       });
     },

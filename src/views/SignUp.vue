@@ -251,6 +251,7 @@ export default {
                 Username: username,
                 Spol: spol,
                 Email: email,
+                Favoriti: "",
               });
               console.log("Uspjesno dodano ");
               alert("Uspješna registracija");
