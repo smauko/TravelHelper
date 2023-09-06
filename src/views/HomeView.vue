@@ -177,10 +177,25 @@ export default {
 
   computed: {
     filtriraneDestinacije() {
+      let kartice2 = [];
+      for (let destinacija of this.kartice) {
+        let counterTRUE = 0;
+        let counterFALSE = 0;
+        for (let element of this.vrstedestinacje) {
+          if (destinacija.vrstadestinacije.includes(element) == false) {
+            counterFALSE = counterFALSE + 1;
+          } else {
+            counterTRUE = counterTRUE + 1;
+          }
+        }
+        if (counterTRUE == this.vrstedestinacje.length) {
+          kartice2.push(destinacija);
+        }
+      }
       let termin = this.store.searchTerm.toLocaleLowerCase();
       let noveKartice = [];
 
-      for (let kartica of this.kartice) {
+      for (let kartica of kartice2) {
         if (
           kartica.grad.toLocaleLowerCase().indexOf(termin) >= 0 ||
           kartica.drzava.toLocaleLowerCase().indexOf(termin) >= 0

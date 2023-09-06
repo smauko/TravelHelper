@@ -23,15 +23,16 @@
       <v-row
         style="display:  display: flex;
       justify-content: flex-end;"
-        ><v-col sm="2" @click="UrediProfil()"
-          ><v-btn>Uredi</v-btn></v-col
-        ></v-row
-      >
+        ><v-col sm="2"
+          ><v-btn @click="PromjeniLozinku">Promjeni lozinku</v-btn></v-col
+        ><v-col sm="2"><v-btn @click="UrediProfil()">Uredi</v-btn></v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
 <script>
-import { auth, db } from "@/firebase";
+import { sendPasswordResetEmail, getAuth, auth, db } from "@/firebase";
+
 import { doc, getDoc, collection } from "firebase/firestore/lite";
 
 export default {
@@ -74,6 +75,23 @@ export default {
     UrediProfil() {
       const emailKorisnika = this.$route.params.id;
       this.$router.push("/uredi-profil/" + emailKorisnika);
+    },
+    PromjeniLozinku() {
+      const emailKorisnika = this.$route.params.id;
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, emailKorisnika)
+        .then(() => {
+          alert(
+            "Na email " +
+              emailKorisnika +
+              " vam je poslan link za promjenu lozinke"
+          );
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
     },
   },
 };
