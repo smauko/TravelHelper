@@ -160,7 +160,7 @@ export default {
             ) {
               if (opis_Destinacije.length > 1650) {
                 alert(
-                  "Maksimalan broj znakova za opis destinacije je 1200 znakova!"
+                  "Maksimalan broj znakova za opis destinacije je 1650 znakova!"
                 );
               } else {
                 await setDoc(doc(db, "destinacije", idDestinacije), {

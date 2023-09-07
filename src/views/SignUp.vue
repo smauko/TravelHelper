@@ -9,7 +9,7 @@
           >
             <div class="card-body p-4 p-md-5">
               <h2 class="fw-bold mb-4 pb-2 pb-md-0 mb-md-2 text-center">
-                SIGN UP
+                Registracija
               </h2>
               <p class="text-black-50 mb-5 text-center">
                 Upišite svoje podatke za izradu računa!
@@ -24,9 +24,7 @@
                         id="firstName"
                         class="form-control form-control-lg"
                       />
-                      <label class="form-label" for="firstName"
-                        >First Name</label
-                      >
+                      <label class="form-label" for="firstName">Ime</label>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
@@ -37,7 +35,7 @@
                         id="lastName"
                         class="form-control form-control-lg"
                       />
-                      <label class="form-label" for="lastName">Last Name</label>
+                      <label class="form-label" for="lastName">Prezime</label>
                     </div>
                   </div>
                 </div>
@@ -52,12 +50,12 @@
                         id="birthdayDate"
                       />
                       <label for="birthdayDate" class="form-label"
-                        >Birthday</label
+                        >Datum rođenja</label
                       >
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
-                    <h6 class="mb-2 pb-1">Gender:</h6>
+                    <h6 class="mb-2 pb-1">Spol:</h6>
 
                     <div class="form-check form-check-inline">
                       <input
@@ -69,7 +67,7 @@
                         v-model="spol"
                         checked
                       />
-                      <label class="form-check-label">Female</label>
+                      <label class="form-check-label">Žena</label>
                     </div>
 
                     <div class="form-check form-check-inline">
@@ -82,7 +80,7 @@
                         v-model="spol"
                       />
                       <label class="form-check-label" for="maleGender"
-                        >Male</label
+                        >Muškarac</label
                       >
                     </div>
 
@@ -96,7 +94,7 @@
                         value="Ostalo"
                       />
                       <label class="form-check-label" for="otherGender"
-                        >Other</label
+                        >Ostalo</label
                       >
                     </div>
                   </div>
@@ -173,21 +171,7 @@
 
 .gradient-custom {
   /* fallback for old browsers */
-  background: #f093fb;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  );
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  );
+  background: #dfbda5;
 }
 
 .card-registration .select-arrow {

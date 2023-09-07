@@ -18,11 +18,14 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/home">Home</router-link>
             </li>
+
             <li v-if="!store.currentUser" class="nav-item">
-              <router-link class="nav-link" to="/login">Login</router-link>
+              <router-link class="nav-link" to="/login">Prijavi se</router-link>
             </li>
             <li v-if="!store.currentUser" class="nav-item">
-              <router-link class="nav-link" to="/signup">Sign Up</router-link>
+              <router-link class="nav-link" to="/signup"
+                >Registriraj se</router-link
+              >
             </li>
             <li v-if="store.currentUser" class="nav-item">
               <router-link
@@ -43,6 +46,9 @@
               <router-link class="nav-link" to="/dodaj-destinaciju"
                 >Nova Destinacija</router-link
               >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">O nama</router-link>
             </li>
             <li v-if="store.currentUser" class="nav-item">
               <a href="#" class="nav-link" @click.prevent="logout()">Log out</a>
@@ -148,6 +154,7 @@ export default {
         this.email = "";
         this.username = "";
         this.spol = "";
+        store.adminUser = "";
         if (this.$route.name !== "home") {
           // ako se nalazi negdje drugdje kao profil ili favoriti pa onda da se samo vrati na home
           this.$router.push("/home");

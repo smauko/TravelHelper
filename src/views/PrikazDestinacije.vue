@@ -48,20 +48,12 @@
             ></v-col
           >
           <v-col sm="2" @click="DodajUFavorite"
-            ><v-btn
-              v-if="
-                store.currentUser &&
-                !store.prikazFavorita.includes(this.prikazDestinacije.id)
-              "
+            ><v-btn v-if="store.currentUser && this.StoreDoesntIncludes()"
               >Dodaj u favorite</v-btn
             ></v-col
           >
           <v-col sm="2" @click="IzbrisiIzFavorita"
-            ><v-btn
-              v-if="
-                store.currentUser &&
-                store.prikazFavorita.includes(this.prikazDestinacije.id)
-              "
+            ><v-btn v-if="store.currentUser && this.StoreIncludes()"
               >Izbriši iz favorita</v-btn
             ></v-col
           ></v-row
@@ -102,7 +94,7 @@ export default {
   },
   mounted() {
     this.dovatiDestinaciju();
-    console.log(store.prikazFavorita);
+    console.log(this.StoreIncludes());
   },
   methods: {
     async dovatiDestinaciju() {
@@ -152,6 +144,22 @@ export default {
         Favoriti: arrayRemove(idDestinacije),
       });
       window.location.reload();
+    },
+    StoreIncludes() {
+      if (
+        store.prikazFavorita != undefined &&
+        store.prikazFavorita.includes(this.prikazDestinacije.id)
+      ) {
+        return true;
+      } else return false;
+    },
+    StoreDoesntIncludes() {
+      if (
+        store.prikazFavorita == undefined ||
+        !store.prikazFavorita.includes(this.prikazDestinacije.id)
+      ) {
+        return true;
+      } else return false;
     },
   },
 };

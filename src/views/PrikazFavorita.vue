@@ -36,19 +36,21 @@ export default {
   methods: {
     async dohvatiSveDestinacije() {
       this.kartice = [];
-      const querySnapshot = await getDocs(collection(db, "destinacije"));
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        if (store.prikazFavorita.includes(doc.id)) {
-          this.kartice.push({
-            id: doc.id,
-            glavnaSlika: data.ImageUrl,
-            drzava: data.Drzava,
-            grad: data.Grad,
-            vrstadestinacije: data.VrstaDestinacije,
-          });
-        }
-      });
+      if (store.prikazFavorita != undefined) {
+        const querySnapshot = await getDocs(collection(db, "destinacije"));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (store.prikazFavorita.includes(doc.id)) {
+            this.kartice.push({
+              id: doc.id,
+              glavnaSlika: data.ImageUrl,
+              drzava: data.Drzava,
+              grad: data.Grad,
+              vrstadestinacije: data.VrstaDestinacije,
+            });
+          }
+        });
+      }
     },
   },
   components: {

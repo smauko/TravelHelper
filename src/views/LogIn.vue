@@ -9,7 +9,7 @@
           >
             <div class="card-body p-4 p-md-5 text-center">
               <div style="margin-bottom: -3%" class="mt-md-1 pb-5">
-                <h2 class="fw-bold mx-auto text-uppercase">Login</h2>
+                <h2 class="fw-bold mx-auto">Prijava</h2>
                 <p class="text-black-50 mb-5">Upišite svoj e-mail i lozinku!</p>
 
                 <div class="form-outline form-black mb-4">
@@ -31,14 +31,14 @@
                     class="form-control form-control-lg"
                     required
                   />
-                  <label class="form-label" for="typePasswordX">Password</label>
+                  <label class="form-label" for="typePasswordX">Lozinka</label>
                 </div>
                 <p class="small mb-5 pb-lg-2">
                   <a
                     class="text-black-50"
                     href="#"
                     @click.prevent="sendPassReset()"
-                    >Forgot password?</a
+                    >Zaboravio si šifru?</a
                   >
                 </p>
                 <div class="mt-4 pt-2">
@@ -47,8 +47,10 @@
                   </button>
 
                   <p class="mb-0">
-                    Don't have an account?
-                    <a href="/signup" class="text-blue-50 fw-bold">Sign Up</a>
+                    Nemaš račun?
+                    <a href="/signup" class="text-blue-50 fw-bold"
+                      >Registriraj se</a
+                    >
                   </p>
                 </div>
               </div>
@@ -68,21 +70,7 @@
 }
 .gradient-custom {
   /* fallback for old browsers */
-  background: #f093fb;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  );
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  );
+  background: #dfbda5;
 }
 </style>
 
