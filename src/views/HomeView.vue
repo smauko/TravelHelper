@@ -112,12 +112,7 @@
           name="naziv"
           type="text"
           class="form-control"
-          placeholder="Ime destinacije (radi ali treba filter) "
-        />
-        <input
-          type="submit"
-          class="btn btn-outline-secondary"
-          value="Pretraži"
+          placeholder="Upiši ime grada ili države "
         />
       </div>
       <div class="d-flex"></div>
