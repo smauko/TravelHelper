@@ -13,7 +13,7 @@
           </v-card-text>
           <v-card-actions>
             <v-btn class="mx-auto" color="primary" @click="Return()"
-              >Gumb</v-btn
+              >Idi nazad</v-btn
             >
           </v-card-actions>
         </v-card>

@@ -200,10 +200,6 @@ export default {
     };
   },
   methods: {
-    imee() {
-      const ime1 = this.ime;
-      return ime1;
-    },
     signup() {
       const auth = getAuth();
       if (this.pass != this.ponovljenipass) {
