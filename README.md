@@ -7,6 +7,6 @@
 - Mentor: doc. dr. sc. Nikola Tanković (link na ntankovic.unipu.hr)
 
 
-- Kratki opis funkcionalnosti: Aplikacija u kojoj se pregledavaju potovanja, filtriraju se po karakteristikama, moze se dodavati u favorite, uređivati profil, ocjenjivati destinacije, login, signup....
-- Link na javni prototip
+- Kratki opis funkcionalnosti: Aplikacija u kojoj se pregledavaju potovanja, filtriraju se po karakteristikama, moze se dodavati u favorite, uređivati profil, dodavanje nih destinacija i brisanje istih, login, signup....
+- Link na javni prototip: https://travelhelper-pi.netlify.app/
 - Zaduženja (planirana) po članu tima - ovaj dio commita svaki član tima za sebe: Sve radim sama :D
