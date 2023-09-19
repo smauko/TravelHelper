@@ -148,6 +148,7 @@ export default {
     };
   },
   mounted() {
+    
     this.dohvatiSveDestinacije();
     //console.log(this.kartice);
     console.log(this.kartice);
